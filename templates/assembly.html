@@ -1,0 +1,269 @@
+<!DOCTYPE html  xmlns="http://www.w3.org/1999/xhtml">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <style>
+
+        /*input output*/
+        .is-top {
+            height: 30px;
+            line-height: 30px;
+            /*background-color: gold;*/
+        }
+
+        .menu-style {
+            margin-bottom: -1px;
+        }
+
+        .el-form-item {
+            /*height: 30px;*/
+            margin-bottom: 10px;
+            line-height: 25px;
+            /*background-color: gold;*/
+        }
+
+        .el-button, .el-button--default {
+            /*background-color: gold;*/
+            height: 20px;
+            line-height: 0;
+        }
+
+        .el-input__inner {
+            /*background-color: gold;*/
+            width: 190px;
+            height: 25px;
+        }
+
+        .el-tabs__content {
+            min-height: 570px;
+        }
+
+        .input_style {
+            width: 200px;
+            height: 30px;
+            /*background-color: gold;*/
+        }
+
+        .el-textarea__inner {
+            /*height: 80px;*/
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+<div id="app" style="width: 800px;  margin:0 auto">
+    <el-container>
+        <el-main>
+            <el-row>
+                <el-col>
+                    <div class="head-style font-style">
+                        DNA assembly
+                    </div>
+
+                    <div class="menu-style">
+
+                        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"
+                                 @select="handleSelect"
+                                 background-color="#545c64"
+                                 text-color="#fff"
+                                 active-text-color="#ffd04b"
+                        >
+
+                            <el-menu-item index="1" class="menu-item">
+                                <a href="home.html" target="_self">introduction</a>
+                            </el-menu-item>
+
+                            <el-menu-item index="2" class="menu-item">
+                                <a href="assembly.html" target="_self">assembly</a>
+                            </el-menu-item>
+
+                            <!--                            <el-menu-item index="3" class="menu-item">-->
+                            <!--                                <a href="doc" target="_self">doc</a>-->
+                            <!--                            </el-menu-item>-->
+
+                        </el-menu>
+
+                    </div>
+                    <el-container>
+                        <div id="show" class="main-height main-style" style="background-color: #eeeeee;margin: 0">
+                            <el-tabs type="border-card" style="border: 0">
+                                <el-tab-pane label="input">
+
+                                    <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="100px"
+                                             class="demo-dynamic" style="border: 0; padding: 0">
+                                        <h3>
+                                            Email address
+                                        </h3>
+                                        <el-form-item
+                                                prop="email"
+                                                label="email"
+                                                :rules="[{ required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                                                         { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }]"
+                                        >
+                                            <el-input v-model="dynamicValidateForm.email"
+                                                      class="input_style"></el-input>
+                                            Required.
+
+                                        </el-form-item>
+
+                                        <h3>
+                                            Gene information
+                                        </h3>
+
+
+                                        <el-form-item label="name">
+                                            <el-input class="input_style"></el-input>
+                                            Optional
+                                        </el-form-item>
+
+                                        <el-form-item label="description Optional">
+                                            <el-input type="textarea"  rows="3"></el-input>
+                                        </el-form-item>
+
+                                        <el-form-item label="DNA seq" >
+                                            <el-input type="textarea" rows="4"></el-input>
+                                        </el-form-item>
+
+                                        <h3>
+                                            Parameters for gene synthesis
+                                        </h3>
+
+                                        <div id="table" style="margin-left: 100px;">
+                                            <el-table
+                                                    border
+                                                    size="mini"
+                                                    style="">
+                                                <el-table-column
+                                                        label="ion">
+
+                                                    <template >
+                                                        <el-row>
+                                                            <el-col>
+                                                                <el-form-item>
+                                                                    aaa
+                                                                </el-form-item>
+                                                            </el-col>
+                                                        </el-row>
+                                                    </template>
+                                                </el-table-column>
+                                                <el-table-column
+                                                        label="concentration">
+                                                </el-table-column>
+                                            </el-table>
+
+                                        </div>
+
+
+                                        <h3>
+                                            res
+                                        </h3>
+                                        <el-form-item>
+                                            <el-button type="primary" @click="submitForm('dynamicValidateForm')">提交
+                                            </el-button>
+                                            <el-button @click="resetForm('dynamicValidateForm')">重置</el-button>
+                                        </el-form-item>
+                                    </el-form>
+
+                                </el-tab-pane>
+
+                                <el-tab-pane label="output">
+
+                                </el-tab-pane>
+
+                            </el-tabs>
+
+
+                        </div>
+                    </el-container>
+
+                    <div class="footer-style footer-font">
+                        copylight
+                    </div>
+                </el-col>
+            </el-row>
+        </el-main>
+
+    </el-container>
+</div>
+
+</body>
+
+<script src="../static/js/vue.js"></script>
+<script src="../static/element-ui/lib/index.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                dynamicValidateForm: {
+                    email: ''
+                },
+
+                tableData: [{
+                    ion: "&sup2;",
+                    name: '王小虎',
+                }, {
+                    ion: 'Na<sup>+</sup> /K<sup>+</sup>(1-1000mM)',
+                    name: '王小虎',
+                }, {
+                    ion: 'Mg<sup>2+</sup> (1-1000mM)',
+                    name: '王小虎',
+                }, {
+                    ion: 'dNTPs (1-1000mM)',
+                    name: '王小虎',
+                }, {
+                    ion: 'Tris<sup>2+</sup> (1-1000mM)',
+                    name: '王小虎',
+                }, {
+                    ion: 'oligo (0.1-1000nM)',
+                    name: '王小虎',
+                }, {
+                    ion: 'primer (0.1-1000nM)',
+                    name: '王小虎',
+                }]
+            };
+
+        },
+        methods: {
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        alert('submit!');
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
+            removeDomain(item) {
+                var index = this.dynamicValidateForm.domains.indexOf(item)
+                if (index !== -1) {
+                    this.dynamicValidateForm.domains.splice(index, 1)
+                }
+            },
+            addDomain() {
+                this.dynamicValidateForm.domains.push({
+                    value: '',
+                    key: Date.now()
+                });
+            }
+        }
+    });
+
+</script>
+</html>
+<script>
+    import ElTableBody from "../static/element-ui/packages/table/src/table-body";
+
+    export default {
+        components: {ElTableBody}
+    }
+</script>
