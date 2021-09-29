@@ -40,7 +40,7 @@ html, body, #app {
 .main-style {
     background-color: #85e3b0;
     width: 100%;
-    min-height: 570px;
+    /*min-height: 570px;*/
 }
 
 /*------------------------*/
