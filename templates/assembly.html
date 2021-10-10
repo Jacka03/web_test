@@ -303,9 +303,14 @@
 </body>
 
 <script src="../static/js/vue.js"></script>
+<script src="../static/js/axios-0.18.0.js"></script>
+<script src="../static/js/jquery.min.js"></script>
 <script src="../static/element-ui/lib/index.js"></script>
 
+
+
 <script>
+
     new Vue({
         el: '#app',
         data() {
@@ -316,7 +321,6 @@
                 result_type: 'Gap',
                 validation: 'No',
                 remnant: '0',
-
 
                 dynamicValidateForm: {
                     email: '',
@@ -362,6 +366,12 @@
 
         },
         methods: {
+            submitForm(formName) {
+                console.log(formName);
+                axios.post("/", this.tableData)
+
+            },
+
             printIndex(index, row) {
 
                 console.log(index, row);
@@ -381,20 +391,7 @@
 
             },
 
-            submitForm(formName) {
-                console.log(formName);
 
-
-
-                // this.$refs[formName].validate((valid) => {
-                //     if (valid) {
-                //         alert('submit!');
-                //     } else {
-                //         console.log('error submit!!');
-                //         return false;
-                //     }
-                // });
-            },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
                 this.remnant = '0';
