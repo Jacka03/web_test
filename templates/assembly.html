@@ -202,7 +202,6 @@
                                                                     :prop="'tableData.' + scope.$index + '.name'"
                                                                     style="height: 34px; margin: -6px 0 0;">
                                                                 <el-input class="input_style"
-                                                                          @blur="printIndex(scope.$index, scope.row)"
                                                                           style="width: 100px; margin-left: -100px;"
                                                                           v-model="scope.row.name"></el-input>
                                                                 {{scope.row.unit}}
@@ -253,10 +252,10 @@
 <!--                                                <el-input style="width: 100px"></el-input>-->
 <!--                                            </div>-->
 
-                                            <div style="margin-bottom: 10px; font-size: 14px;">Pool primer concentration(0.1-1000nM):
-                                                <el-input style="width: 100px"></el-input>
-                                                mM
-                                            </div>
+<!--                                            <div style="margin-bottom: 10px; font-size: 14px;">Pool primer concentration(0.1-1000nM):-->
+<!--                                                <el-input style="width: 100px"></el-input>-->
+<!--                                                mM-->
+<!--                                            </div>-->
 
 
                                         </div>
@@ -273,7 +272,7 @@
 
                                         <el-form-item style="margin-top: 30px">
                                             <el-button style="margin-right: 70px; margin-left: 120px" type="primary"
-                                                       @click="submitForm('dynamicValidateForm')">submit
+                                                       @click="submitForm(dynamicValidateForm)">submit
                                             </el-button>
                                             <el-button @click="resetForm('dynamicValidateForm')">default</el-button>
                                         </el-form-item>
@@ -281,6 +280,7 @@
                                 </el-tab-pane>
 
                                 <el-tab-pane label="output" name="output">
+
 
                                 </el-tab-pane>
 
@@ -383,6 +383,9 @@
 
             submitForm(formName) {
                 console.log(formName);
+
+
+
                 // this.$refs[formName].validate((valid) => {
                 //     if (valid) {
                 //         alert('submit!');
