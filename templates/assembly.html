@@ -330,31 +330,38 @@
                     pools: '1',
                     tableData: [
                         {
-                            name: '1.1',
+                            name: 'Na',
+                            data: '1.1',
                             ion: 'Na<sup>+</sup> (0.5-1.5M)',
                             unit: 'M',
                         }, {
-                            name: '50',
+                            name: 'K',
+                            data: '50',
                             ion: 'Na<sup>+</sup> / K<sup>+</sup> (1-1000mM)',
                             unit: 'mM',
                         }, {
-                            name: '8',
+                            name: 'Mg',
+                            data: '8',
                             ion: 'Mg<sup>2+</sup> (1-1000mM)',
                             unit: 'mM',
                         }, {
-                            name: '4',
+                            name: 'dNTPs',
+                            data: '4',
                             ion: 'dNTPs (1-1000mM)',
                             unit: 'mM',
                         }, {
-                            name: '10',
+                            name: 'Tris',
+                            data: '10',
                             ion: 'Tris<sup>2+</sup> (1-1000mM)',
                             unit: 'mM',
                         }, {
-                            name: '10',
+                            name: 'oligo',
+                            data: '10',
                             ion: 'oligo (0.1-1000nM)',
                             unit: 'mM',
                         }, {
-                            name: '400',
+                            name: 'primer',
+                            data: '400',
                             ion: 'primer (0.1-1000nM)',
                             unit: 'mM',
                         }]
@@ -367,8 +374,13 @@
         },
         methods: {
             submitForm(formName) {
-                console.log(formName);
-                axios.post("/", this.tableData)
+                axios.post("/assembly/", formName)
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
 
             },
 
