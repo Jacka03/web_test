@@ -179,15 +179,13 @@
 
                                             <template>
                                                 <el-table
-                                                        :data="tableData"
+                                                        :data="dynamicValidateForm.tableData"
                                                         border
                                                         style="width: 64%">
                                                     <el-table-column
                                                             prop="ion"
                                                             label="ion"
-
                                                             style="height: 26px!important;">
-
 
                                                         <template slot-scope="scope">
                                                             <p v-html="scope.row.ion"
@@ -197,13 +195,20 @@
                                                     </el-table-column>
                                                     <el-table-column
                                                             prop="concentration"
-
                                                             label="concentration">
+
                                                         <template slot-scope="scope">
-                                                            <el-input class="input_style" @blur="printIndex(scope.$index, scope.row)" style="width: 100px"
-                                                                      v-model="scope.row.name"></el-input>
-                                                            {{scope.row.unit}}
+                                                            <el-form-item
+                                                                    :prop="'tableData.' + scope.$index + '.name'"
+                                                                    style="height: 34px; margin: -6px 0 0;">
+                                                                <el-input class="input_style"
+                                                                          @blur="printIndex(scope.$index, scope.row)"
+                                                                          style="width: 100px; margin-left: -100px;"
+                                                                          v-model="scope.row.name"></el-input>
+                                                                {{scope.row.unit}}
+                                                            </el-form-item>
                                                         </template>
+
                                                     </el-table-column>
                                                 </el-table>
                                             </template>
@@ -319,39 +324,40 @@
                     min_len: '20',
                     max_len: '30',
                     pools: '1',
+                    tableData: [
+                        {
+                            name: '1.1',
+                            ion: 'Na<sup>+</sup> (0.5-1.5M)',
+                            unit: 'M',
+                        }, {
+                            name: '50',
+                            ion: 'Na<sup>+</sup> / K<sup>+</sup> (1-1000mM)',
+                            unit: 'mM',
+                        }, {
+                            name: '8',
+                            ion: 'Mg<sup>2+</sup> (1-1000mM)',
+                            unit: 'mM',
+                        }, {
+                            name: '4',
+                            ion: 'dNTPs (1-1000mM)',
+                            unit: 'mM',
+                        }, {
+                            name: '10',
+                            ion: 'Tris<sup>2+</sup> (1-1000mM)',
+                            unit: 'mM',
+                        }, {
+                            name: '10',
+                            ion: 'oligo (0.1-1000nM)',
+                            unit: 'mM',
+                        }, {
+                            name: '400',
+                            ion: 'primer (0.1-1000nM)',
+                            unit: 'mM',
+                        }]
                 },
 
                 activeName: 'input',
-                tableData: [
-                    {
-                        name: '1.1',
-                        ion: 'Na<sup>+</sup> (0.5-1.5M)',
-                        unit: 'M',
-                    }, {
-                        name: '50',
-                        ion: 'Na<sup>+</sup> / K<sup>+</sup> (1-1000mM)',
-                        unit: 'mM',
-                    }, {
-                        name: '8',
-                        ion: 'Mg<sup>2+</sup> (1-1000mM)',
-                        unit: 'mM',
-                    }, {
-                        name: '4',
-                        ion: 'dNTPs (1-1000mM)',
-                        unit: 'mM',
-                    }, {
-                        name: '10',
-                        ion: 'Tris<sup>2+</sup> (1-1000mM)',
-                        unit: 'mM',
-                    }, {
-                        name: '10',
-                        ion: 'oligo (0.1-1000nM)',
-                        unit: 'mM',
-                    }, {
-                        name: '400',
-                        ion: 'primer (0.1-1000nM)',
-                        unit: 'mM',
-                    }]
+
             };
 
         },
